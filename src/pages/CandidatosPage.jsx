@@ -14,9 +14,12 @@ import { CandidaturaBtn } from "../components/CandidaturaBtn";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setCandidatosMostrados } from "../redux/candidatosSlice";
+import { ModalPropuestas } from "../components/ModalPropuestas";
+import { Button } from "react-native-paper";
 
 export const CandidatosPage = () => {
   const [selectedCandidaturaId, setSelectedCandidaturaId] = useState(1);
+  const [isModalvisible, setIsModalVisible] = useState(false);
   const candidatos = useSelector((state) => state.candidatos.value);
   const dispatch = useDispatch();
 
@@ -59,9 +62,13 @@ export const CandidatosPage = () => {
 
         <View style={styles.cardContainer}>
           {candidatos.map((candidato) => (
-            <CandidatoCard key={candidato.id} candidatoData={candidato} />
+            <CandidatoCard key={candidato.id} candidatoData={candidato}/>
           ))}
         </View>
+
+        <ModalPropuestas/>
+
+        <Button textColor="white" labelStyle={{fontSize:20, fontWeight:"bold"}} style={styles.btnVotar}>Votar</Button>
       </ScrollView>
     </SafeAreaView>
   );
@@ -107,4 +114,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  btnVotar: {
+    backgroundColor: "#d51685",
+    width: "70%",
+    alignSelf: "center",
+    marginVertical: 20,
+    borderRadius: 6,
+    paddingVertical: 10,
+  }
 });

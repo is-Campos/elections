@@ -6,7 +6,7 @@ export const CandidaturaBtn = ({ candidatura, isSelected }) => {
       textColor={isSelected ? "white" : "black"}
       mode={isSelected ? "contained" : "outlined"}
       buttonColor={isSelected && "#d51685"}
-      style={{ alignSelf: "center", marginVertical: 5, borderColor: !isSelected && "#d51685" }}
+      style={{ alignSelf: "center", marginVertical: 5, borderColor: !isSelected && "#d51685", borderRadius:6 }}
     >
       {candidatura.cargoPolitico}
     </Button>

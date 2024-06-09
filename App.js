@@ -5,18 +5,21 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { CandidatosPage } from "./src/pages";
 import { store } from "./src/redux/store";
 import { Provider } from "react-redux";
+import { ModalProvider } from "./src/context/ModalProvider";
 
 export default function App() {
   return (
     <Provider store={store}>
-      <PaperProvider>
-        <SafeAreaProvider>
-          <SafeAreaView style={styles.container}>
-            <CandidatosPage />
-            <StatusBar style="auto" />
-          </SafeAreaView>
-        </SafeAreaProvider>
-      </PaperProvider>
+      <ModalProvider>
+        <PaperProvider>
+          <SafeAreaProvider>
+            <SafeAreaView style={styles.container}>
+              <CandidatosPage />
+              <StatusBar style="auto" />
+            </SafeAreaView>
+          </SafeAreaProvider>
+        </PaperProvider>
+      </ModalProvider>
     </Provider>
   );
 }
