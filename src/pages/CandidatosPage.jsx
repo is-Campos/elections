@@ -17,9 +17,8 @@ import { setCandidatosMostrados } from "../redux/candidatosSlice";
 import { ModalPropuestas } from "../components/ModalPropuestas";
 import { Button } from "react-native-paper";
 
-export const CandidatosPage = () => {
+export const CandidatosPage = ({navigation}) => {
   const [selectedCandidaturaId, setSelectedCandidaturaId] = useState(1);
-  const [isModalvisible, setIsModalVisible] = useState(false);
   const candidatos = useSelector((state) => state.candidatos.value);
   const dispatch = useDispatch();
 
@@ -68,7 +67,7 @@ export const CandidatosPage = () => {
 
         <ModalPropuestas/>
 
-        <Button textColor="white" labelStyle={{fontSize:20, fontWeight:"bold"}} style={styles.btnVotar}>Votar</Button>
+        <Button textColor="white" onPress={()=>navigation.navigate('Privacidad')} labelStyle={{fontSize:20, fontWeight:"bold"}} style={styles.btnVotar}>Votar</Button>
       </ScrollView>
     </SafeAreaView>
   );

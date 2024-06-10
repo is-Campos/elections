@@ -1,24 +1,42 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, SafeAreaView } from "react-native";
+import { StyleSheet, SafeAreaView, Text, View } from "react-native";
 import { PaperProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { CandidatosPage } from "./src/pages";
+import { CandidatosPage, MostrarInePage, PrivacidadPage } from "./src/pages";
 import { store } from "./src/redux/store";
 import { Provider } from "react-redux";
-import { ModalProvider } from "./src/context/ModalProvider";
+import { ModalProvider, PoliticasProvider } from "./src/context/index";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <Provider store={store}>
       <ModalProvider>
-        <PaperProvider>
-          <SafeAreaProvider>
-            <SafeAreaView style={styles.container}>
-              <CandidatosPage />
-              <StatusBar style="auto" />
-            </SafeAreaView>
-          </SafeAreaProvider>
-        </PaperProvider>
+        <PoliticasProvider>
+          <PaperProvider>
+            <SafeAreaProvider>
+              <SafeAreaView style={styles.container}>
+                <NavigationContainer>
+                  <Stack.Navigator initialRouteName="Home">
+                    <Stack.Screen name="Home" component={CandidatosPage} />
+                    <Stack.Screen
+                      name="Privacidad"
+                      component={PrivacidadPage}
+                    />
+                    <Stack.Screen
+                      name="Fotos INE"
+                      component={MostrarInePage}
+                    />
+                  </Stack.Navigator>
+                </NavigationContainer>
+                <StatusBar style="auto" />
+              </SafeAreaView>
+            </SafeAreaProvider>
+          </PaperProvider>
+        </PoliticasProvider>
       </ModalProvider>
     </Provider>
   );
@@ -28,7 +46,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
   },
 });

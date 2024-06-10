@@ -1,3 +1,6 @@
 export {CandidatoCard} from './CandidatoCard'
 export {CandidaturaBtn} from './CandidaturaBtn'
 export {ModalPropuestas} from './ModalPropuestas'
+export {PoliticasCheckbox} from './PoliticasCheckbox'
+export {PoliticaPrivacidadCard} from './PoliticaPrivacidadCard'
+export {PoliticasDialog} from './PoliticasDialog'
