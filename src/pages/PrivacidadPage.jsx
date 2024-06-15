@@ -19,7 +19,7 @@ export const PrivacidadPage = ({ navigation }) => {
       return;
     }
 
-    navigation.navigate("Votar");
+    navigation.navigate("Fotos INE");
   };
 
   return (

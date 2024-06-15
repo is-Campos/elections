@@ -41,20 +41,20 @@ export const allCandidatos = [
     cargoPolitico: "Presidente de México",
     candidaturaId: 1
   },
-  {
-    id: "4",
-    nombreCompleto: "Juan Rodríguez Morales",
-    partidoPolitico: "Movimiento Regeneración Nacional",
-    abreviaturaPartido: "MORENA",
-    propuestas: [
-      "Lucha contra la corrupción",
-      "Incremento del salario mínimo",
-      "Desarrollo de infraestructura",
-    ],
-    foto: null,
-    cargoPolitico: "Presidente de México",
-    candidaturaId: 1
-  },
+  // {
+  //   id: "4",
+  //   nombreCompleto: "Juan Rodríguez Morales",
+  //   partidoPolitico: "Movimiento Regeneración Nacional",
+  //   abreviaturaPartido: "MORENA",
+  //   propuestas: [
+  //     "Lucha contra la corrupción",
+  //     "Incremento del salario mínimo",
+  //     "Desarrollo de infraestructura",
+  //   ],
+  //   foto: null,
+  //   cargoPolitico: "Presidente de México",
+  //   candidaturaId: 1
+  // },
   {
     id: "5",
     nombreCompleto: "Luis González Torres",
@@ -97,20 +97,20 @@ export const allCandidatos = [
     cargoPolitico: "Gobernador de Jalisco",
     candidaturaId: 2
   },
-  {
-    id: "8",
-    nombreCompleto: "Elena Ramírez Vega",
-    partidoPolitico: "Movimiento Regeneración Nacional",
-    abreviaturaPartido: "MORENA",
-    propuestas: [
-      "Programas de empleo",
-      "Apoyo a la educación superior",
-      "Reducción de impuestos",
-    ],
-    foto: null,
-    cargoPolitico: "Gobernador de Jalisco",
-    candidaturaId: 2
-  },
+  // {
+  //   id: "8",
+  //   nombreCompleto: "Elena Ramírez Vega",
+  //   partidoPolitico: "Movimiento Regeneración Nacional",
+  //   abreviaturaPartido: "MORENA",
+  //   propuestas: [
+  //     "Programas de empleo",
+  //     "Apoyo a la educación superior",
+  //     "Reducción de impuestos",
+  //   ],
+  //   foto: null,
+  //   cargoPolitico: "Gobernador de Jalisco",
+  //   candidaturaId: 2
+  // },
   {
     id: "9",
     nombreCompleto: "Fernando Ruiz Medina",
@@ -153,20 +153,20 @@ export const allCandidatos = [
     cargoPolitico: "Presidente Municipal de Monterrey",
     candidaturaId: 3
   },
-  {
-    id: "12",
-    nombreCompleto: "Gabriela Torres Lozano",
-    partidoPolitico: "Movimiento Regeneración Nacional",
-    abreviaturaPartido: "MORENA",
-    propuestas: [
-      "Educación inclusiva",
-      "Reducción de la contaminación",
-      "Promoción de la cultura",
-    ],
-    foto: null,
-    cargoPolitico: "Presidente Municipal de Monterrey",
-    candidaturaId: 3
-  },
+  // {
+  //   id: "12",
+  //   nombreCompleto: "Gabriela Torres Lozano",
+  //   partidoPolitico: "Movimiento Regeneración Nacional",
+  //   abreviaturaPartido: "MORENA",
+  //   propuestas: [
+  //     "Educación inclusiva",
+  //     "Reducción de la contaminación",
+  //     "Promoción de la cultura",
+  //   ],
+  //   foto: null,
+  //   cargoPolitico: "Presidente Municipal de Monterrey",
+  //   candidaturaId: 3
+  // },
   {
     id: "13",
     nombreCompleto: "Jorge López Mendoza",
@@ -209,20 +209,20 @@ export const allCandidatos = [
     cargoPolitico: "Gobernador de Yucatán",
     candidaturaId: 4
   },
-  {
-    id: "16",
-    nombreCompleto: "Alicia Ramírez Guzmán",
-    partidoPolitico: "Movimiento Regeneración Nacional",
-    abreviaturaPartido: "MORENA",
-    propuestas: [
-      "Reforma agraria",
-      "Acceso a la educación superior",
-      "Plan de seguridad",
-    ],
-    foto: null,
-    cargoPolitico: "Gobernador de Yucatán",
-    candidaturaId: 4
-  },
+  // {
+  //   id: "16",
+  //   nombreCompleto: "Alicia Ramírez Guzmán",
+  //   partidoPolitico: "Movimiento Regeneración Nacional",
+  //   abreviaturaPartido: "MORENA",
+  //   propuestas: [
+  //     "Reforma agraria",
+  //     "Acceso a la educación superior",
+  //     "Plan de seguridad",
+  //   ],
+  //   foto: null,
+  //   cargoPolitico: "Gobernador de Yucatán",
+  //   candidaturaId: 4
+  // },
 ];
 
 export const presidentesMexico = allCandidatos.filter(

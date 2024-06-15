@@ -20,7 +20,7 @@ export default function App() {
             <SafeAreaProvider>
               <SafeAreaView style={styles.container}>
                 <NavigationContainer>
-                  <Stack.Navigator initialRouteName="Home">
+                  <Stack.Navigator initialRouteName="Votar">
                     <Stack.Screen name="Home" component={CandidatosPage} />
                     <Stack.Screen
                       name="Privacidad"

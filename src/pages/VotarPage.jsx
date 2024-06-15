@@ -5,37 +5,40 @@ import {
   Text,
   View,
   Button,
-  Image,
   TouchableOpacity,
   Dimensions,
+  ScrollView,
 } from "react-native";
 import { CameraView } from "expo-camera";
 import { useCameraPermissions } from "expo-camera";
 import { Button as ButtonRNP } from "react-native-paper";
-import * as MediaLibrary from 'expo-media-library';
+import * as MediaLibrary from "expo-media-library";
+import { CandidaturaRowVotar } from "../components";
+import { candidaturas } from "../data";
 
-export const VotarPage = ({navigation}) => {
+export const VotarPage = ({ navigation }) => {
   const [permission, requestPermission] = useCameraPermissions();
   const cameraRef = useRef(null);
   const [isRecording, setIsRecording] = useState(false);
 
   const [videoUri, setVideoUri] = useState(null);
-  
-  const [mediaLibraryPermission, requestMediaLibraryPermission] = MediaLibrary.usePermissions();
 
-  useEffect(() => {
-    const saveVideo = async () => {
-      if (videoUri !== null) {
-        try {
-          await MediaLibrary.createAssetAsync(videoUri);
-          alert("Video guardado exitosamente!");
-        } catch (error) {
-          console.error("Failed to save video", error);
-        }
-      }
-    };
-    saveVideo();
-  }, [videoUri]);
+  const [mediaLibraryPermission, requestMediaLibraryPermission] =
+    MediaLibrary.usePermissions();
+
+  // useEffect(() => {
+  //   const saveVideo = async () => {
+  //     if (videoUri !== null) {
+  //       try {
+  //         await MediaLibrary.createAssetAsync(videoUri);
+  //         alert("Video guardado exitosamente!");
+  //       } catch (error) {
+  //         console.error("Failed to save video", error);
+  //       }
+  //     }
+  //   };
+  //   saveVideo();
+  // }, [videoUri]);
 
   if (!permission) {
     return <View />;
@@ -62,19 +65,22 @@ export const VotarPage = ({navigation}) => {
         <Text style={{ textAlign: "center" }}>
           Necesitamos tu permiso para acceder a la biblioteca de medios
         </Text>
-        <Button onPress={requestMediaLibraryPermission} title="Conceder permiso" />
+        <Button
+          onPress={requestMediaLibraryPermission}
+          title="Conceder permiso"
+        />
       </View>
     );
   }
 
   const startRecording = async () => {
     if (cameraRef.current && !isRecording) {
-      console.log("entra a ref")
+      console.log("entra a ref");
       try {
-        console.log("aaaaaayuda")
+        console.log("aaaaaayuda");
         setIsRecording(true);
         const video = await cameraRef.current.recordAsync();
-        console.log("paso el record await")
+        console.log("paso el record await");
         setVideoUri(video.uri);
         console.log("Recording started", video.uri);
       } catch (error) {
@@ -97,34 +103,43 @@ export const VotarPage = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.contentContainer}>
+      <ScrollView style={styles.contentContainer}>
         <Text style={styles.title}>
-          A continuación, toma una foto de tu INE por ambos lados
+          Selecciona el candidato de tu preferencia para cada candidatura
         </Text>
 
-          <>
-            <View style={styles.cameraContainer}>
-              <CameraView facing="front" mode="video" style={styles.camera} ref={cameraRef}>
-                <View style={styles.cameraButtonContainer}>
-                  <TouchableOpacity
+        <>
+          <View style={styles.cameraContainer}>
+            <CameraView
+              facing="front"
+              mode="video"
+              style={styles.camera}
+              ref={cameraRef}
+            >
+              <View style={styles.cameraButtonContainer}>
+                <TouchableOpacity
+                  style={styles.cameraButton}
+                  onPress={startRecording}
+                >
+                  <ButtonRNP
+                    textColor="black"
+                    icon={"camera"}
                     style={styles.cameraButton}
-                    onPress={startRecording}
                   >
-                    <ButtonRNP
-                      textColor="black"
-                      icon={"camera"}
-                      style={styles.cameraButton}
-                    >
-                      Empezar a grabar
-                    </ButtonRNP>
-                  </TouchableOpacity>
-                </View>
-              </CameraView>
-              <ButtonRNP onPress={stopRecording}>Dejar de grabar</ButtonRNP>
-              {/* <ButtonRNP onPress={saveVideo}>Guardar video</ButtonRNP> */}
-            </View>
-          </>
-      </View>
+                    Empezar a grabar
+                  </ButtonRNP>
+                </TouchableOpacity>
+              </View>
+            </CameraView>
+            {/* <ButtonRNP onPress={saveVideo}>Guardar video</ButtonRNP> */}
+          </View>
+        </>
+        {candidaturas.map((candidatura) => (
+          <CandidaturaRowVotar key={candidatura.id} candidatura={candidatura.cargoPolitico} />
+        ))}
+
+        <ButtonRNP onPress={stopRecording}>Dejar de grabar</ButtonRNP>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -138,13 +153,13 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   contentContainer: {
-    paddingHorizontal: 40,
+    width: '100%'
   },
   title: {
     fontSize: 20,
     fontWeight: "bold",
     textAlign: "center",
-    marginBottom: 50,
+    marginVertical: 50,
   },
   captureButton: {
     width: "100%",
@@ -155,7 +170,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     alignSelf: "center",
   },
-  imageview:{
+  imageview: {
     width: "100%",
     backgroundColor: "transparent",
     borderRadius: 5,
@@ -174,7 +189,7 @@ const styles = StyleSheet.create({
   textoside: {
     fontSize: 18,
     textAlign: "center",
-    marginVertical: 20
+    marginVertical: 20,
   },
   image: {
     width: 300,
@@ -210,5 +225,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#d51685",
     padding: 10,
     borderRadius: 6,
-  }
+  },
 });
