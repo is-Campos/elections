@@ -11,7 +11,8 @@ export const allCandidatos = [
     ],
     foto: null,
     cargoPolitico: "Presidente de México",
-    candidaturaId: 1
+    candidaturaId: 1,
+    idPartido: 1  // Partido Acción Nacional
   },
   {
     id: "2",
@@ -25,7 +26,8 @@ export const allCandidatos = [
     ],
     foto: null,
     cargoPolitico: "Presidente de México",
-    candidaturaId: 1
+    candidaturaId: 2,
+    idPartido: 2  // Partido Revolucionario Institucional
   },
   {
     id: "3",
@@ -39,24 +41,11 @@ export const allCandidatos = [
     ],
     foto: null,
     cargoPolitico: "Presidente de México",
-    candidaturaId: 1
+    candidaturaId: 3,
+    idPartido: 3  // Partido de la Revolución Democrática
   },
-  // {
-  //   id: "4",
-  //   nombreCompleto: "Juan Rodríguez Morales",
-  //   partidoPolitico: "Movimiento Regeneración Nacional",
-  //   abreviaturaPartido: "MORENA",
-  //   propuestas: [
-  //     "Lucha contra la corrupción",
-  //     "Incremento del salario mínimo",
-  //     "Desarrollo de infraestructura",
-  //   ],
-  //   foto: null,
-  //   cargoPolitico: "Presidente de México",
-  //   candidaturaId: 1
-  // },
   {
-    id: "5",
+    id: "4",
     nombreCompleto: "Luis González Torres",
     partidoPolitico: "Partido Acción Nacional",
     abreviaturaPartido: "PAN",
@@ -67,10 +56,11 @@ export const allCandidatos = [
     ],
     foto: null,
     cargoPolitico: "Gobernador de Jalisco",
-    candidaturaId: 2
+    candidaturaId: 4,
+    idPartido: 1  // Partido Acción Nacional
   },
   {
-    id: "6",
+    id: "5",
     nombreCompleto: "Sofía Martínez Jiménez",
     partidoPolitico: "Partido Revolucionario Institucional",
     abreviaturaPartido: "PRI",
@@ -81,10 +71,11 @@ export const allCandidatos = [
     ],
     foto: null,
     cargoPolitico: "Gobernador de Jalisco",
-    candidaturaId: 2
+    candidaturaId: 5,
+    idPartido: 2  // Partido Revolucionario Institucional
   },
   {
-    id: "7",
+    id: "6",
     nombreCompleto: "Miguel Ángel Domínguez",
     partidoPolitico: "Partido de la Revolución Democrática",
     abreviaturaPartido: "PRD",
@@ -95,24 +86,11 @@ export const allCandidatos = [
     ],
     foto: null,
     cargoPolitico: "Gobernador de Jalisco",
-    candidaturaId: 2
+    candidaturaId: 6,
+    idPartido: 3  // Partido de la Revolución Democrática
   },
-  // {
-  //   id: "8",
-  //   nombreCompleto: "Elena Ramírez Vega",
-  //   partidoPolitico: "Movimiento Regeneración Nacional",
-  //   abreviaturaPartido: "MORENA",
-  //   propuestas: [
-  //     "Programas de empleo",
-  //     "Apoyo a la educación superior",
-  //     "Reducción de impuestos",
-  //   ],
-  //   foto: null,
-  //   cargoPolitico: "Gobernador de Jalisco",
-  //   candidaturaId: 2
-  // },
   {
-    id: "9",
+    id: "7",
     nombreCompleto: "Fernando Ruiz Medina",
     partidoPolitico: "Partido Acción Nacional",
     abreviaturaPartido: "PAN",
@@ -123,10 +101,11 @@ export const allCandidatos = [
     ],
     foto: null,
     cargoPolitico: "Presidente Municipal de Monterrey",
-    candidaturaId: 3
+    candidaturaId: 7,
+    idPartido: 1  // Partido Acción Nacional
   },
   {
-    id: "10",
+    id: "8",
     nombreCompleto: "Lucía Ramírez Solís",
     partidoPolitico: "Partido Revolucionario Institucional",
     abreviaturaPartido: "PRI",
@@ -137,10 +116,11 @@ export const allCandidatos = [
     ],
     foto: null,
     cargoPolitico: "Presidente Municipal de Monterrey",
-    candidaturaId: 3
+    candidaturaId: 8,
+    idPartido: 2  // Partido Revolucionario Institucional
   },
   {
-    id: "11",
+    id: "9",
     nombreCompleto: "Ricardo Vázquez Gutiérrez",
     partidoPolitico: "Partido de la Revolución Democrática",
     abreviaturaPartido: "PRD",
@@ -151,24 +131,11 @@ export const allCandidatos = [
     ],
     foto: null,
     cargoPolitico: "Presidente Municipal de Monterrey",
-    candidaturaId: 3
+    candidaturaId: 9,
+    idPartido: 3  // Partido de la Revolución Democrática
   },
-  // {
-  //   id: "12",
-  //   nombreCompleto: "Gabriela Torres Lozano",
-  //   partidoPolitico: "Movimiento Regeneración Nacional",
-  //   abreviaturaPartido: "MORENA",
-  //   propuestas: [
-  //     "Educación inclusiva",
-  //     "Reducción de la contaminación",
-  //     "Promoción de la cultura",
-  //   ],
-  //   foto: null,
-  //   cargoPolitico: "Presidente Municipal de Monterrey",
-  //   candidaturaId: 3
-  // },
   {
-    id: "13",
+    id: "10",
     nombreCompleto: "Jorge López Mendoza",
     partidoPolitico: "Partido Acción Nacional",
     abreviaturaPartido: "PAN",
@@ -179,10 +146,11 @@ export const allCandidatos = [
     ],
     foto: null,
     cargoPolitico: "Gobernador de Yucatán",
-    candidaturaId: 4
+    candidaturaId: 10,
+    idPartido: 1  // Partido Acción Nacional
   },
   {
-    id: "14",
+    id: "11",
     nombreCompleto: "Rosa María González",
     partidoPolitico: "Partido Revolucionario Institucional",
     abreviaturaPartido: "PRI",
@@ -193,10 +161,11 @@ export const allCandidatos = [
     ],
     foto: null,
     cargoPolitico: "Gobernador de Yucatán",
-    candidaturaId: 4
+    candidaturaId: 11,
+    idPartido: 2  // Partido Revolucionario Institucional
   },
   {
-    id: "15",
+    id: "12",
     nombreCompleto: "Pedro Morales Álvarez",
     partidoPolitico: "Partido de la Revolución Democrática",
     abreviaturaPartido: "PRD",
@@ -207,23 +176,11 @@ export const allCandidatos = [
     ],
     foto: null,
     cargoPolitico: "Gobernador de Yucatán",
-    candidaturaId: 4
+    candidaturaId: 12,
+    idPartido: 3  // Partido de la Revolución Democrática
   },
-  // {
-  //   id: "16",
-  //   nombreCompleto: "Alicia Ramírez Guzmán",
-  //   partidoPolitico: "Movimiento Regeneración Nacional",
-  //   abreviaturaPartido: "MORENA",
-  //   propuestas: [
-  //     "Reforma agraria",
-  //     "Acceso a la educación superior",
-  //     "Plan de seguridad",
-  //   ],
-  //   foto: null,
-  //   cargoPolitico: "Gobernador de Yucatán",
-  //   candidaturaId: 4
-  // },
 ];
+
 
 export const presidentesMexico = allCandidatos.filter(
   (candidato) => candidato.cargoPolitico === "Presidente de México"

@@ -31,11 +31,10 @@ export const CandidaturaRowVotar = ({
                   setUserVotes((userVotes) =>
                     userVotes.map((voto) =>
                       voto.candidaturaId === candidatura.id
-                        ? { ...voto, candidatoId: candidato.id }
+                        ? { ...voto, candidatoId: candidato.id, partidoId: candidato.idPartido }
                         : voto
                     )
                   );
-                  console.log(userVotes)
                 }}
               />
             </View>

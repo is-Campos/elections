@@ -11,7 +11,11 @@ import {
 } from "./src/pages";
 import { store } from "./src/redux/store";
 import { Provider } from "react-redux";
-import { ModalProvider, PoliticasProvider } from "./src/context/index";
+import {
+  ModalProvider,
+  PoliticasProvider,
+  VotosProvider,
+} from "./src/context/index";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Suspense, useEffect, useState } from "react";
@@ -51,34 +55,52 @@ export default function App() {
   if (!dbLoaded) return <Text>Loading...</Text>;
 
   return (
-    <Suspense fallback={<View style={{backgroundColor:"red"}}><Text>Loading...</Text></View>}>
+    <Suspense
+      fallback={
+        <View style={{ backgroundColor: "red" }}>
+          <Text>Loading...</Text>
+        </View>
+      }
+    >
       <SQLiteProvider databaseName="votes.db" useSuspense>
         <Provider store={store}>
           <ModalProvider>
-            <PoliticasProvider>
-              <PaperProvider>
-                <SafeAreaProvider>
-                  <SafeAreaView style={styles.container}>
-                    <NavigationContainer>
-                      <Stack.Navigator initialRouteName="Resultados">
-                        <Stack.Screen name="Home" component={CandidatosPage} />
-                        <Stack.Screen
-                          name="Privacidad"
-                          component={PrivacidadPage}
-                        />
-                        <Stack.Screen
-                          name="Fotos INE"
-                          component={MostrarInePage}
-                        />
-                        <Stack.Screen name="Votar" component={VotarPage} />
-                        <Stack.Screen name="Resultados" component={ResultadosPage} />
-                      </Stack.Navigator>
-                    </NavigationContainer>
-                    <StatusBar style="auto" />
-                  </SafeAreaView>
-                </SafeAreaProvider>
-              </PaperProvider>
-            </PoliticasProvider>
+            <VotosProvider>
+              <PoliticasProvider>
+                <PaperProvider>
+                  <SafeAreaProvider>
+                    <SafeAreaView style={styles.container}>
+                      <NavigationContainer>
+                        <Stack.Navigator initialRouteName="Home">
+                          <Stack.Screen
+                            name="Home"
+                            component={CandidatosPage}
+                          />
+                          <Stack.Screen
+                            name="Privacidad"
+                            component={PrivacidadPage}
+                          />
+                          <Stack.Screen
+                            name="Fotos INE"
+                            component={MostrarInePage}
+                          />
+                          <Stack.Screen name="Votar" component={VotarPage} />
+                          <Stack.Screen
+                            name="Resultados"
+                            component={ResultadosPage}
+                            options={{
+                              headerBackTitleVisible: false,
+                              headerBackVisible: false
+                            }}
+                          />
+                        </Stack.Navigator>
+                      </NavigationContainer>
+                      <StatusBar style="auto" />
+                    </SafeAreaView>
+                  </SafeAreaProvider>
+                </PaperProvider>
+              </PoliticasProvider>
+            </VotosProvider>
           </ModalProvider>
         </Provider>
       </SQLiteProvider>

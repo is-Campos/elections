@@ -1,11 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import {
   SafeAreaView,
   StyleSheet,
   Text,
   View,
   Button,
-  TouchableOpacity,
   Dimensions,
   ScrollView,
 } from "react-native";
@@ -16,15 +15,17 @@ import * as MediaLibrary from "expo-media-library";
 import { CandidaturaRowVotar } from "../components";
 import { candidaturas } from "../data";
 import { useSQLiteContext } from "expo-sqlite";
+import { VotosContext } from "../context";
 
 export const VotarPage = ({ navigation }) => {
   const [permission, requestPermission] = useCameraPermissions();
   const cameraRef = useRef(null);
   const [isRecording, setIsRecording] = useState(false);
-  const candidaturasInitialState = candidaturas.map(candidatura => ({candidaturaId: candidatura.id, candidatoId: 0}))
+  const candidaturasInitialState = candidaturas.map(candidatura => ({candidaturaId: candidatura.id, candidatoId: 0, partidoId: 0}))
   const [userVotes, setUserVotes] = useState(candidaturasInitialState)
-  const [votes, setVotes] = useState([])
   const [videoUri, setVideoUri] = useState(null);
+
+  const {votos, setVotos} = useContext(VotosContext)
 
   const db = useSQLiteContext();
 
@@ -46,21 +47,23 @@ export const VotarPage = ({ navigation }) => {
   }, [videoUri]);
 
   const getVotes = async() => {
-    // const dbcreate = await db.execAsync(`CREATE TABLE IF NOT EXISTS vote (id INTEGER PRIMARY KEY AUTOINCREMENT, idCandidatura INTEGER, idCandidato INTEGER);`);
     const result = await db.getAllAsync('SELECT * FROM vote')
-    setVotes(result)
-    console.log(result)
-    console.log(candidaturasInitialState)
+    setVotos(result)
+    console.log('AAAA', result)
+  }
+
+  const dropTable = async() => {
+    // await db.execAsync('DROP table vote ;')
+    // await db.execAsync('CREATE TABLE IF NOT EXISTS vote (id INTEGER PRIMARY KEY AUTOINCREMENT, idCandidatura INTEGER, idCandidato INTEGER, idPartido INTEGER);')
   }
 
   const insertVotes = async() => {
     userVotes.forEach(async(vote) => {
-      await db.runAsync(`INSERT INTO vote (idCandidatura, idCandidato) VALUES (${vote.candidaturaId}, ${vote.candidatoId});`)
+      await db.runAsync(`INSERT INTO vote (idCandidatura, idCandidato, idPartido) VALUES (${vote.candidaturaId}, ${vote.candidatoId}, ${vote.partidoId});`)
     });
   }
 
   useEffect(()=>{
-    console.log(db)
     db.withTransactionAsync(async () => {
       await getVotes()
     })
@@ -125,13 +128,16 @@ export const VotarPage = ({ navigation }) => {
           await insertVotes()
           await getVotes()
         })
+        console.log(votos)
+        navigation.navigate('Resultados')
       } catch (error) {
         console.error("Failed to stop recording", error);
       }
     }
 
+    // navigation.navigate('Resultados')
     // db.withTransactionAsync(async () => {
-    //   await getVotes()
+    //   await dropTable()
     // })
   };
 
@@ -151,22 +157,7 @@ export const VotarPage = ({ navigation }) => {
               ref={cameraRef}
               onCameraReady={startRecording}
             >
-              <View style={styles.cameraButtonContainer}>
-                {/* <TouchableOpacity
-                  style={styles.cameraButton}
-                  onPress={startRecording}
-                >
-                  <ButtonRNP
-                    textColor="black"
-                    icon={"camera"}
-                    style={styles.cameraButton}
-                  >
-                    Empezar a grabar
-                  </ButtonRNP>
-                </TouchableOpacity> */}
-              </View>
             </CameraView>
-            {/* <ButtonRNP onPress={saveVideo}>Guardar video</ButtonRNP> */}
           </View>
         </>
         {candidaturas.map((candidatura) => (
