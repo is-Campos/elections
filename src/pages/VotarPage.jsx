@@ -15,30 +15,56 @@ import { Button as ButtonRNP } from "react-native-paper";
 import * as MediaLibrary from "expo-media-library";
 import { CandidaturaRowVotar } from "../components";
 import { candidaturas } from "../data";
+import { useSQLiteContext } from "expo-sqlite";
 
 export const VotarPage = ({ navigation }) => {
   const [permission, requestPermission] = useCameraPermissions();
   const cameraRef = useRef(null);
   const [isRecording, setIsRecording] = useState(false);
-
+  const candidaturasInitialState = candidaturas.map(candidatura => ({candidaturaId: candidatura.id, candidatoId: 0}))
+  const [userVotes, setUserVotes] = useState(candidaturasInitialState)
+  const [votes, setVotes] = useState([])
   const [videoUri, setVideoUri] = useState(null);
+
+  const db = useSQLiteContext();
 
   const [mediaLibraryPermission, requestMediaLibraryPermission] =
     MediaLibrary.usePermissions();
 
-  // useEffect(() => {
-  //   const saveVideo = async () => {
-  //     if (videoUri !== null) {
-  //       try {
-  //         await MediaLibrary.createAssetAsync(videoUri);
-  //         alert("Video guardado exitosamente!");
-  //       } catch (error) {
-  //         console.error("Failed to save video", error);
-  //       }
-  //     }
-  //   };
-  //   saveVideo();
-  // }, [videoUri]);
+  useEffect(() => {
+    const saveVideo = async () => {
+      if (videoUri !== null) {
+        try {
+          await MediaLibrary.createAssetAsync(videoUri);
+          alert("Video guardado exitosamente!");
+        } catch (error) {
+          console.error("Failed to save video", error);
+        }
+      }
+    };
+    saveVideo();
+  }, [videoUri]);
+
+  const getVotes = async() => {
+    // const dbcreate = await db.execAsync(`CREATE TABLE IF NOT EXISTS vote (id INTEGER PRIMARY KEY AUTOINCREMENT, idCandidatura INTEGER, idCandidato INTEGER);`);
+    const result = await db.getAllAsync('SELECT * FROM vote')
+    setVotes(result)
+    console.log(result)
+    console.log(candidaturasInitialState)
+  }
+
+  const insertVotes = async() => {
+    userVotes.forEach(async(vote) => {
+      await db.runAsync(`INSERT INTO vote (idCandidatura, idCandidato) VALUES (${vote.candidaturaId}, ${vote.candidatoId});`)
+    });
+  }
+
+  useEffect(()=>{
+    console.log(db)
+    db.withTransactionAsync(async () => {
+      await getVotes()
+    })
+  },[db])
 
   if (!permission) {
     return <View />;
@@ -95,10 +121,18 @@ export const VotarPage = ({ navigation }) => {
         cameraRef.current.stopRecording();
         setIsRecording(false);
         console.log("Recording stopped");
+        db.withTransactionAsync(async () => {
+          await insertVotes()
+          await getVotes()
+        })
       } catch (error) {
         console.error("Failed to stop recording", error);
       }
     }
+
+    // db.withTransactionAsync(async () => {
+    //   await getVotes()
+    // })
   };
 
   return (
@@ -115,9 +149,10 @@ export const VotarPage = ({ navigation }) => {
               mode="video"
               style={styles.camera}
               ref={cameraRef}
+              onCameraReady={startRecording}
             >
               <View style={styles.cameraButtonContainer}>
-                <TouchableOpacity
+                {/* <TouchableOpacity
                   style={styles.cameraButton}
                   onPress={startRecording}
                 >
@@ -128,17 +163,17 @@ export const VotarPage = ({ navigation }) => {
                   >
                     Empezar a grabar
                   </ButtonRNP>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
               </View>
             </CameraView>
             {/* <ButtonRNP onPress={saveVideo}>Guardar video</ButtonRNP> */}
           </View>
         </>
         {candidaturas.map((candidatura) => (
-          <CandidaturaRowVotar key={candidatura.id} candidatura={candidatura.cargoPolitico} />
+          <CandidaturaRowVotar key={candidatura.id} candidatura={candidatura} userVotes={userVotes} setUserVotes={setUserVotes}/>
         ))}
 
-        <ButtonRNP onPress={stopRecording}>Dejar de grabar</ButtonRNP>
+        <ButtonRNP style={styles.btnVotar} textColor="white" onPress={stopRecording}>Enviar Voto</ButtonRNP>
       </ScrollView>
     </SafeAreaView>
   );
@@ -221,9 +256,12 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     opacity: 0.7,
   },
-  btnVerificar: {
+  btnVotar: {
     backgroundColor: "#d51685",
     padding: 10,
     borderRadius: 6,
+    width: "80%",
+    alignSelf: "center",
+    marginVertical: 20
   },
 });
