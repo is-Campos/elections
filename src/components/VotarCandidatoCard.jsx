@@ -11,7 +11,7 @@ export const VotarCandidatoCard = ({candidato}) => {
         width={90}
         height={130}
         source={{
-          uri: "https://upload.wikimedia.org/wikipedia/commons/9/91/Sheinbaum_Abril_2024.jpg",
+          uri: candidato.foto,
         }}
       />
     </View>

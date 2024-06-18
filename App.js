@@ -84,13 +84,20 @@ export default function App() {
                             name="Fotos INE"
                             component={MostrarInePage}
                           />
-                          <Stack.Screen name="Votar" component={VotarPage} />
+                          <Stack.Screen
+                            name="Votar"
+                            component={VotarPage}
+                            options={{
+                              headerBackTitleVisible: false,
+                              headerBackVisible: false,
+                            }}
+                          />
                           <Stack.Screen
                             name="Resultados"
                             component={ResultadosPage}
                             options={{
                               headerBackTitleVisible: false,
-                              headerBackVisible: false
+                              headerBackVisible: false,
                             }}
                           />
                         </Stack.Navigator>

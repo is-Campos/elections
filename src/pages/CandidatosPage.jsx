@@ -23,6 +23,8 @@ export const CandidatosPage = ({navigation}) => {
   const dispatch = useDispatch();
 
   const handleSelectedCandidaturaChanged = (id) => {
+    // console.log('candis:',allCandidatos)
+    console.log('id.:', id)
     setSelectedCandidaturaId(id);
     dispatch(
       setCandidatosMostrados(

@@ -21,7 +21,7 @@ export const CandidatoCard = ({ candidatoData }) => {
       <View style={styles.fotoWrapper}>
         <Card.Cover
           style={styles.foto}
-          source={{ uri: "https://picsum.photos/700" }}
+          source={{ uri: candidatoData.foto }}
         />
       </View>
       <Card.Actions>

@@ -29,6 +29,10 @@ export const ResultadosPage = ({navigation}) => {
     return votes;
   };
 
+  const getMaxVotes = (votosCandidatura) => {
+    return Math.max(...votosCandidatura.map(v => v.numeroVotos), 0);
+  };
+
   return (
     <SafeAreaView>
       <ScrollView>
@@ -44,6 +48,7 @@ export const ResultadosPage = ({navigation}) => {
               axisOptions={{
                 font,
               }}
+              domain={{ y: [0, getMaxVotes(findVotosCandidatura(candidatura.id))] }}
             >
               {({ points, chartBounds }) => (
                 <Bar
@@ -59,7 +64,7 @@ export const ResultadosPage = ({navigation}) => {
                   <LinearGradient
                     start={vec(0, 0)}
                     end={vec(0, 400)}
-                    colors={["#a78bfa", "#a78bfa50"]}
+                    colors={["#d51685", "#d5168550"]}
                   />
                 </Bar>
               )}

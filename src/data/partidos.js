@@ -12,12 +12,12 @@ export const partidos = [
   },
   {
     id:2,
-    nombre: "Partido Revolucionario Institucional",
-    abreviatura: "PRI"
+    nombre: "Morena",
+    abreviatura: "Morena"
   },
   {
     id:3,
-    nombre: "Partido de la Revolución Democrática",
-    abreviatura: "PRD"
+    nombre: "Movimiento Ciudadano",
+    abreviatura: "MC"
   },
 ]

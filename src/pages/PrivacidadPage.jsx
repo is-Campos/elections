@@ -10,7 +10,7 @@ import { useContext } from "react";
 import { PoliticasContext } from "../context";
 
 export const PrivacidadPage = ({ navigation }) => {
-  const { checked } = useContext(PoliticasContext);
+  const { checked, setChecked } = useContext(PoliticasContext);
   const { setIsDialogVisible } = useContext(PoliticasContext);
 
   const handleComenzar = () => {
@@ -19,6 +19,7 @@ export const PrivacidadPage = ({ navigation }) => {
       return;
     }
 
+    setChecked(false);
     navigation.navigate("Fotos INE");
   };
 

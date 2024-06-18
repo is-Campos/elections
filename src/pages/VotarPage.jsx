@@ -37,7 +37,7 @@ export const VotarPage = ({ navigation }) => {
       if (videoUri !== null) {
         try {
           await MediaLibrary.createAssetAsync(videoUri);
-          alert("Video guardado exitosamente!");
+          // alert("Video guardado exitosamente!");
         } catch (error) {
           console.error("Failed to save video", error);
         }
@@ -52,10 +52,10 @@ export const VotarPage = ({ navigation }) => {
     console.log('AAAA', result)
   }
 
-  const dropTable = async() => {
-    // await db.execAsync('DROP table vote ;')
-    // await db.execAsync('CREATE TABLE IF NOT EXISTS vote (id INTEGER PRIMARY KEY AUTOINCREMENT, idCandidatura INTEGER, idCandidato INTEGER, idPartido INTEGER);')
-  }
+  // const dropTable = async() => {
+  //   await db.execAsync('DROP table vote ;')
+  //   await db.execAsync('CREATE TABLE IF NOT EXISTS vote (id INTEGER PRIMARY KEY AUTOINCREMENT, idCandidatura INTEGER, idCandidato INTEGER, idPartido INTEGER);')
+  // }
 
   const insertVotes = async() => {
     userVotes.forEach(async(vote) => {
